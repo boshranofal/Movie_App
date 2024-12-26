@@ -10,7 +10,7 @@ class SearchAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: 52,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         color: AppColor.tertiary.withOpacity(0.12),
@@ -22,10 +22,21 @@ class SearchAppbar extends StatelessWidget {
             Images.search,
             fit: BoxFit.scaleDown,
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 12),
           Text(
             "Search",
             style: AppStyle.meduim14.copyWith(color: AppColor.secondary),
+          ),
+          const SizedBox(width: 165),
+          Container(
+            height: 25,
+            width: 1,
+            color: AppColor.secondary,
+          ),
+          const SizedBox(width: 16),
+          SvgPicture.asset(
+            Images.mic,
+            fit: BoxFit.scaleDown,
           ),
         ],
       ),

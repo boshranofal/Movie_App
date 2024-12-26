@@ -31,7 +31,7 @@ class CustomAppbar extends StatelessWidget {
           ],
         ),
         const Spacer(),
-        Image.asset(Images.profile_Image)
+        Image.asset(Images.profile)
       ],
     );
   }

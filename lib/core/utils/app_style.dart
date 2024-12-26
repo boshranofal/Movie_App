@@ -14,4 +14,8 @@ class AppStyle {
     fontWeight: FontWeight.w500,
     fontSize: 14,
   );
+  static TextStyle meduim18 = const TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 18,
+  );
 }

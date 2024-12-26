@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/app_color.dart';
+import 'package:movie_app/core/utils/app_style.dart';
 import 'package:movie_app/views/widget/custom_appbar.dart';
+import 'package:movie_app/views/widget/filtter_list_view.dart';
 import 'package:movie_app/views/widget/search_appbar.dart';
 
 class HomeScreenBody extends StatelessWidget {
@@ -12,19 +14,26 @@ class HomeScreenBody extends StatelessWidget {
       height: double.infinity,
       width: double.infinity,
       color: AppColor.primary,
-      child: const SingleChildScrollView(
+      child: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 36.0),
+                padding: const EdgeInsets.symmetric(horizontal: 36.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomAppbar(),
-                    SizedBox(height: 35),
-                    SearchAppbar()
+                    const CustomAppbar(),
+                    const SizedBox(height: 35),
+                    const SearchAppbar(),
+                    const SizedBox(height: 35),
+                    Text(
+                      "Filtters",
+                      style: AppStyle.meduim18.copyWith(color: Colors.white),
+                    ),
+                    const SizedBox(height: 16),
+                    const FiltterListView()
                   ],
                 ),
               ),
