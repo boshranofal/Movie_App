@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/app_color.dart';
 import 'package:movie_app/core/utils/app_style.dart';
 import 'package:movie_app/views/widget/custom_appbar.dart';
+import 'package:movie_app/views/widget/featured_series.dart';
 import 'package:movie_app/views/widget/filtter_list_view.dart';
 import 'package:movie_app/views/widget/search_appbar.dart';
 
@@ -33,7 +34,24 @@ class HomeScreenBody extends StatelessWidget {
                       style: AppStyle.meduim18.copyWith(color: Colors.white),
                     ),
                     const SizedBox(height: 16),
-                    const FiltterListView()
+                    const FiltterListView(),
+                    const SizedBox(height: 30),
+                    Row(
+                      children: [
+                        Text(
+                          "Featured",
+                          style:
+                              AppStyle.meduim24.copyWith(color: Colors.white),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          "Series",
+                          style: AppStyle.light.copyWith(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 24),
+                    const FeaturedSeries(),
                   ],
                 ),
               ),

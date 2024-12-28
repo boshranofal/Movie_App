@@ -16,7 +16,7 @@ class FiltterItem extends StatelessWidget {
           height: 52,
           width: 52,
           decoration: BoxDecoration(
-            color: AppColor.secondary,
+            color: AppColor.tertiary,
             borderRadius: BorderRadius.circular(16),
           ),
           child: Center(
