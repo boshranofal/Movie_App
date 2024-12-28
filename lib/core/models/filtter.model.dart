@@ -6,7 +6,7 @@ class FiltterModel {
 
   FiltterModel({required this.name, required this.img});
 
-  List<FiltterModel> filtterItem = [
+  static final List<FiltterModel> filtterItem = [
     FiltterModel(name: 'Gener', img: Images.general),
     FiltterModel(name: 'Top IMDB', img: Images.top),
     FiltterModel(name: 'Language', img: Images.language),
