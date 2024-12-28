@@ -8,4 +8,5 @@ class Images {
   static const String top = 'assets/images/top.svg';
   static const String language = 'assets/images/language.svg';
   static const String watched = 'assets/images/watched.svg';
+  static const String play = 'assets/images/play.svg';
 }
