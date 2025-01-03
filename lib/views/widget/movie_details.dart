@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:movie_app/core/models/movie_response_model.dart';
+import 'package:movie_app/core/networking/api_constant.dart';
 
 //import 'package:movie_app/core/models/feature_series_model.dart';
 import 'package:movie_app/core/utils/app_color.dart';
@@ -11,11 +13,10 @@ import 'package:movie_app/views/widget/metadate_item.dart';
 
 class MovieDetails extends StatelessWidget {
   const MovieDetails({
-    Key? key,
-    // required this.featureSeriesItem,
-  }) : super(key: key);
-
-  //final FeatureSeriesModel featureSeriesItem;
+    super.key,
+    required this.model,
+  });
+  final Results model;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -24,8 +25,10 @@ class MovieDetails extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.4,
             width: double.infinity,
-            child: Image.asset("assets/images/details.jpg",
-                fit: BoxFit.cover, width: double.infinity),
+            child: Image.network(
+                "${ApiConstants.imageBaseUrl + ApiConstants.backdropSize}${model.backdropPath}",
+                fit: BoxFit.cover,
+                width: double.infinity),
           ),
           Container(
             margin: EdgeInsets.only(
@@ -72,29 +75,30 @@ class MovieDetails extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Text(
-                      "Lucifer",
+                      model.title ?? "",
                       style: AppStyle.semiBold24.copyWith(color: Colors.white),
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: Row(
                       children: [
                         MetadateItem(
                             icon: Icons.calendar_today_outlined,
                             title: "Release Date",
-                            releaseDate: "7/7/2021"),
+                            releaseDate: model.releaseDate ?? ""),
                         SizedBox(width: 18),
                         MetadateItem(
-                            icon: Icons.language,
-                            title: "Language",
-                            releaseDate: "English"),
+                          icon: Icons.language,
+                          title: "Language",
+                          releaseDate: model.originalLanguage ?? "",
+                        ),
                         SizedBox(width: 18),
                         MetadateItem(
                             icon: Icons.trending_up,
                             title: "Poprularity",
-                            releaseDate: "2727")
+                            releaseDate: model.popularity.toString()),
                       ],
                     ),
                   ),
@@ -111,7 +115,7 @@ class MovieDetails extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          "mkldcknjvb v jbcbjcd d hbcdc bcdjs jchnsx jhdjcd nc bc cb cduc k cdcndkc djcndkcm jcndcnd  ",
+                          model.overview ?? "",
                           style: AppStyle.regular16
                               .copyWith(color: Colors.white70),
                           textAlign: TextAlign.start,
@@ -134,7 +138,7 @@ class MovieDetails extends StatelessWidget {
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              "6.4/10",
+                              model.voteAverage.toString(),
                               style: AppStyle.regular16
                                   .copyWith(color: Colors.white),
                             ),
@@ -148,7 +152,7 @@ class MovieDetails extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          "155 Vote",
+                          model.voteCount.toString(),
                           style:
                               AppStyle.regular16.copyWith(color: Colors.white),
                         ),

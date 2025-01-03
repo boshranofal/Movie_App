@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/models/movie_response_model.dart';
 import 'package:movie_app/core/utils/app_color.dart';
 import 'package:movie_app/views/widget/movie_details.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key});
-
+  const DetailsScreen({super.key, required this.model});
+  final Results? model;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +25,9 @@ class DetailsScreen extends StatelessWidget {
           },
         ),
       ),
-      body: const MovieDetails(),
+      body:  MovieDetails(
+        model: model!,
+      ),
     );
   }
 }
