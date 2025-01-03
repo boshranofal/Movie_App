@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/di/dependency_injuction.dart';
 import 'package:movie_app/core/utils/app_router.dart';
 import 'package:movie_app/core/utils/app_routes.dart';
 
-void main() {
+void main() async {
+  await setUpGetIt();
   runApp(const MovieApp());
 }
 
