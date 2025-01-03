@@ -15,7 +15,7 @@ class FeaturedSeries extends StatefulWidget {
   });
 
   final Results? movie;
-  final List <MoviesResponseModel> favoriteMovies = [];
+  final MoviesResponseModel favoriteMovies = MoviesResponseModel(results: []);
   @override
   State<FeaturedSeries> createState() => _FeaturedSeriesState();
 }
@@ -26,7 +26,26 @@ class _FeaturedSeriesState extends State<FeaturedSeries> {
   @override
   void initState() {
     super.initState();
-    
+    _loadFavoriteStatus();
+  }
+
+  Future<void> _loadFavoriteStatus() async {
+    if (widget.movie != null) {
+      final prefs = await SharedPreferences.getInstance();
+      setState(() {
+        isFavorite = prefs.getBool(widget.movie!.id.toString()) ?? false;
+      });
+    }
+  }
+  Future<void> _toggleFavorite() async {
+    if (widget.movie != null) {
+      final prefs = await SharedPreferences.getInstance();
+      final newStatus = !isFavorite;
+      await prefs.setBool(widget.movie!.id.toString(), newStatus);
+      setState(() {
+        isFavorite = newStatus;
+      });
+    }
   }
 
 
@@ -113,7 +132,7 @@ class _FeaturedSeriesState extends State<FeaturedSeries> {
                                   top: 10,
                                   right: 16,
                                   child: GestureDetector(
-                                    onTap:favoriteMovies.add(listOfMovies[index]),
+                                    onTap: _toggleFavorite,
                                     child: Icon(
                                       isFavorite
                                           ? Icons.favorite_rounded
