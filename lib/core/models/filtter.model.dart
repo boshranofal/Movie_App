@@ -1,3 +1,4 @@
+import 'package:movie_app/core/models/movie_response_model.dart';
 import 'package:movie_app/core/utils/app_images.dart';
 
 class FiltterModel {
@@ -12,4 +13,5 @@ class FiltterModel {
     FiltterModel(name: 'Language', img: Images.language),
     FiltterModel(name: 'Watched', img: Images.watched),
   ];
+   
 }
