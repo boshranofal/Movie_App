@@ -1,6 +1,6 @@
 # 🎬 Movie Application
 
-A modern and user-friendly movie application built with Flutter for both Android and iOS. This app allows users to browse movies by categories, search for specific titles, and stay updated with the latest trending films from trusted sources.
+A modern and user-friendly movie application built with Flutter for Android. This app allows users to browse movies by categories, search for specific titles, and stay updated with the latest trending films from trusted sources.
 
 ## 📋 Features
 
