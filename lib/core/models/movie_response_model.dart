@@ -17,7 +17,7 @@ class MoviesResponseModel {
     this.totalPages,
     this.totalResults,
   });
-static final List<MoviesResponseModel>favouriteItem = [];
+
   factory MoviesResponseModel.fromJson(Map<String, dynamic> json) =>
       _$MoviesResponseModelFromJson(json);
 
@@ -71,3 +71,5 @@ class Results {
 
   Map<String, dynamic> toJson() => _$ResultsToJson(this);
 }
+
+List<Results>favouriteItem = [];

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/models/movie_response_model.dart';
 import 'package:movie_app/core/utils/app_color.dart';
 import 'package:movie_app/core/utils/app_style.dart';
 
@@ -10,16 +11,7 @@ class FavoritScreen extends StatefulWidget {
 }
 
 class _FavoritScreenState extends State<FavoritScreen> {
-  List<String> favoriteItems = [
-    "Venom: The Last Dance",
-    "Moana 2",
-    "Elevation",
-  ];
-  void removeItem(String item) {
-    setState(() {
-      favoriteItems.remove(item);
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +26,7 @@ class _FavoritScreenState extends State<FavoritScreen> {
         backgroundColor: AppColor.primary,
         elevation: 0,
       ),
-      body: favoriteItems.isEmpty
+      body: favouriteItem.isEmpty
           ? const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -52,14 +44,13 @@ class _FavoritScreenState extends State<FavoritScreen> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: ListView.separated(
-                itemCount: favoriteItems.length,
+                itemCount: favouriteItem.length,
                 separatorBuilder: (context, index) => const Divider(
                   // color: AppColor.tertiary,
                   thickness: 0.5,
                   height: 20,
                 ),
                 itemBuilder: (context, index) {
-                  final item = favoriteItems[index];
                   return Container(
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
@@ -70,6 +61,7 @@ class _FavoritScreenState extends State<FavoritScreen> {
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
+                          // ignore: deprecated_member_use
                           color: Colors.black.withOpacity(0.2),
                           blurRadius: 6,
                           offset: const Offset(0, 3),
@@ -79,7 +71,7 @@ class _FavoritScreenState extends State<FavoritScreen> {
                     child: ListTile(
                       contentPadding: const EdgeInsets.all(12),
                       title: Text(
-                        item,
+                        favouriteItem[index].title!,
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -92,7 +84,11 @@ class _FavoritScreenState extends State<FavoritScreen> {
                       ),
                       trailing: IconButton(
                         icon: const Icon(Icons.delete, color: Colors.redAccent),
-                        onPressed: () => removeItem(item),
+                        onPressed: (){
+                          setState(() {
+                            favouriteItem.removeAt(index);
+                          });
+                        },
                       ),
                     ),
                   );

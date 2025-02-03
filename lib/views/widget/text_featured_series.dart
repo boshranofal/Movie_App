@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/app_style.dart';
 import 'package:movie_app/views/screen/favorit_screen.dart';
 
-class TextFeaturedSeries extends StatelessWidget {
+class TextFeaturedSeries extends StatefulWidget {
   const TextFeaturedSeries({super.key});
 
+  @override
+  State<TextFeaturedSeries> createState() => _TextFeaturedSeriesState();
+}
+
+class _TextFeaturedSeriesState extends State<TextFeaturedSeries> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -26,7 +31,9 @@ class TextFeaturedSeries extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => const FavoritScreen(),
                 ),
-              );
+              ).then((value) {
+                setState(() {});
+              });
             },
             icon: const Icon(
               Icons.favorite_border_rounded,

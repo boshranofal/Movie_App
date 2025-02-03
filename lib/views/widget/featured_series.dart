@@ -9,7 +9,7 @@ import 'package:movie_app/views/screen/details_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FeaturedSeries extends StatefulWidget {
-   FeaturedSeries({
+  FeaturedSeries({
     super.key,
     this.movie,
   });
@@ -27,6 +27,7 @@ class _FeaturedSeriesState extends State<FeaturedSeries> {
   void initState() {
     super.initState();
     _loadFavoriteStatus();
+    setState(() {});
   }
 
   Future<void> _loadFavoriteStatus() async {
@@ -37,6 +38,7 @@ class _FeaturedSeriesState extends State<FeaturedSeries> {
       });
     }
   }
+
   Future<void> _toggleFavorite() async {
     if (widget.movie != null) {
       final prefs = await SharedPreferences.getInstance();
@@ -47,7 +49,6 @@ class _FeaturedSeriesState extends State<FeaturedSeries> {
       });
     }
   }
-
 
   @override
   void dispose() {
@@ -79,26 +80,26 @@ class _FeaturedSeriesState extends State<FeaturedSeries> {
               clipBehavior: Clip.none,
               controller: _pageController,
               itemCount: listOfMovies.length,
-               physics: const BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 return AnimatedBuilder(
                   animation: _pageController,
                   builder: (context, child) {
                     double value = 0;
-                    if (_pageController.hasClients &&_pageController.position.haveDimensions) {
+                    if (_pageController.hasClients &&
+                        _pageController.position.haveDimensions) {
                       value = _pageController.page! - index;
+                    } else {
+                      value = _pageController.initialPage - index.toDouble();
                     }
-                     else {
-                value = _pageController.initialPage - index.toDouble();
-              }
-                     value = value.clamp(-1, 1);
-              final double verticalOffset = value.abs() * 22;
-              final double rotation = value * -0.1;
-              return Transform(
-                transform: Matrix4.identity()
-                  ..translate(0.0, verticalOffset)
-                  ..rotateZ(rotation),
-                alignment: Alignment.center,
+                    value = value.clamp(-1, 1);
+                    final double verticalOffset = value.abs() * 22;
+                    final double rotation = value * -0.1;
+                    return Transform(
+                      transform: Matrix4.identity()
+                        ..translate(0.0, verticalOffset)
+                        ..rotateZ(rotation),
+                      alignment: Alignment.center,
                       child: GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -132,12 +133,25 @@ class _FeaturedSeriesState extends State<FeaturedSeries> {
                                   top: 10,
                                   right: 16,
                                   child: GestureDetector(
-                                    onTap: _toggleFavorite,
+                                    onTap: () {
+                                      setState(() {
+                                        if (favouriteItem
+                                            .contains(listOfMovies[index])) {
+                                          favouriteItem
+                                              .remove(listOfMovies[index]);
+                                        } else {
+                                          favouriteItem
+                                              .add(listOfMovies[index]);
+                                        }
+                                      });
+                                    },
                                     child: Icon(
-                                      isFavorite
-                                          ? Icons.favorite_rounded
-                                          : Icons.favorite_border_rounded,
-                                      color: isFavorite
+                                      favouriteItem
+                                              .contains(listOfMovies[index])
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
+                                      color: favouriteItem
+                                              .contains(listOfMovies[index])
                                           ? Colors.red
                                           : Colors.white,
                                       size: 30,
